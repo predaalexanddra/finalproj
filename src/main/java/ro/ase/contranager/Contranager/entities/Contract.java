@@ -43,5 +43,26 @@ public class Contract {
     @OneToMany(mappedBy = "contract")
     private List<Payment> payments;
 
+    public Contract(Long noContract,
+        @NotNull @Size(min = 2, max = 30) String subject,
+        @NotNull Timestamp startDate, @NotNull Timestamp endDate,
+        @NotNull Double value,
+        @NotNull Currency currency, @NotNull boolean isCompleted, Blob document,
+        ContractType contractType, Partner partner,
+        List<Payment> payments) {
+        this.noContract = noContract;
+        this.subject = subject;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.value = value;
+        this.currency = currency;
+        this.isCompleted = isCompleted;
+        this.document = document;
+        this.contractType = contractType;
+        this.partner = partner;
+        this.payments = payments;
+    }
 
+    public Contract() {
+    }
 }

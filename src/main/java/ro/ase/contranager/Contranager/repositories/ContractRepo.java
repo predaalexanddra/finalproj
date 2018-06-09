@@ -10,4 +10,5 @@ public interface ContractRepo extends JpaRepository<Contract, Long> {
   @Query("select c from Contract c order by c.value desc ")
   List<Contract> findContractsOrdered();
   List<Contract> findContractsByIsCompletedIsFalse();
+  Contract findByNoContract(Long no);
 }

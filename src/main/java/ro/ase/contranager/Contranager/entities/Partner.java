@@ -27,4 +27,15 @@ public class Partner {
     @OneToMany(mappedBy = "partner")
     private List<Contract> contracts;
 
+    public Partner(Long cui,
+        @Size(min = 2, max = 30) String name, Address address,
+        Contact contact) {
+        this.cui = cui;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+    }
+
+    public Partner() {
+    }
 }

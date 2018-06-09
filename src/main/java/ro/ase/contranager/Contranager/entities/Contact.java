@@ -24,4 +24,17 @@ public class Contact {
     @OneToOne(mappedBy = "contact")
     @JsonIgnore
     private Partner partner;
+
+    public Contact(Long id,
+        @NotNull @Size(min = 2, max = 30) String name,
+        @NotNull String email,
+        @NotNull @Size(min = 10, max = 30) String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public Contact() {
+    }
 }

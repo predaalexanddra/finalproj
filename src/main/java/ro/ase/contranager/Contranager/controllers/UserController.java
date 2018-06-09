@@ -11,46 +11,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ro.ase.contranager.Contranager.entities.Employee;
-import ro.ase.contranager.Contranager.entities.Partner;
-import ro.ase.contranager.Contranager.pojos.PartnerPojo;
-import ro.ase.contranager.Contranager.pojos.PartnerPojoSimplified;
-import ro.ase.contranager.Contranager.repositories.PartnerRepo;
-import ro.ase.contranager.Contranager.services.PartnerService;
+import ro.ase.contranager.Contranager.pojos.EmployeePojo;
+import ro.ase.contranager.Contranager.pojos.EmployeePojoSimplified;
+import ro.ase.contranager.Contranager.repositories.EmployeeRepo;
+import ro.ase.contranager.Contranager.services.UserService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
-public class PartnerController {
+public class UserController {
 
   @Autowired
-  PartnerRepo partnerRepo;
-  @Autowired
-  PartnerService partnerService;
+  private UserService userService;
 
-  @GetMapping(value="/partners")
-  public List<PartnerPojoSimplified> findAll(){
-    return partnerService.displayAll();
-  }
-
-  @GetMapping(value="/partnersnames")
-  public List<String> findPartnersNames(){
-    return partnerRepo.findPartnersNames();
-  }
-
-  @PostMapping(value = "/addpartner")
-  public ResponseEntity<? extends Object> addNewPartner(@RequestBody PartnerPojo partnerPojo){
-    Partner result=partnerService.addPartner(partnerPojo);
+  @PostMapping(value = "/adduser")
+  public ResponseEntity<String> addNewUser(@RequestBody  EmployeePojo employeePojo){
+    Employee result= userService.addEmployee(employeePojo);
     if(result!=null)
       return new ResponseEntity<>(HttpStatus.OK);
     else
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
-  @GetMapping(value="/deletepartner")
-  public ResponseEntity<String> deletePartner(@RequestParam(name = "cui") Long cui){
-    Partner result=partnerService.deletePartner(cui);
+  @GetMapping(value="/deleteuser")
+  public ResponseEntity<String> deleteUser(@RequestParam(name = "cnp") Long cnp){
+    Employee result=userService.deleteEmployee(cnp);
     if(result!=null)
       return new ResponseEntity<>(HttpStatus.OK);
     else
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  }
+
+  @GetMapping(value="/users")
+  public List<EmployeePojoSimplified> findAll(){
+    return userService.displayAll();
   }
 }

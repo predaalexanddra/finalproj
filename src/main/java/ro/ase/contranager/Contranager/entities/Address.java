@@ -23,4 +23,15 @@ public class Address {
     @OneToOne(mappedBy = "address")
     @JsonBackReference
     private Partner partner;
+
+    public Address(String postalCode, @NotNull String country,
+        @NotNull String city, @NotNull String street) {
+        this.postalCode = postalCode;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+    }
+
+    public Address() {
+    }
 }

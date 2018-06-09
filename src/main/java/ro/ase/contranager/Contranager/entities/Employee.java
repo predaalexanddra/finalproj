@@ -16,7 +16,6 @@ import lombok.Data;
 public class Employee {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long cnp;
   @NotNull
   private String name;
@@ -36,40 +35,20 @@ public class Employee {
   @OneToMany(mappedBy = "employee")
   private List<Log> logs;
 
-  public Long getCnp() {
-    return cnp;
-  }
-
-  public void setCnp(Long cnp) {
+  public Employee(Long cnp, @NotNull String name,
+      @NotNull String phone, @NotNull boolean isAdmin,
+      @NotNull String username, @NotNull String password,
+      Department department) {
     this.cnp = cnp;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
     this.name = name;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
+    this.phone = phone;
+    this.isAdmin = isAdmin;
     this.username = username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
     this.password = password;
+    this.department = department;
   }
 
-  public boolean isAdmin() {
-    return isAdmin;
+  public Employee() {
   }
 }
 
