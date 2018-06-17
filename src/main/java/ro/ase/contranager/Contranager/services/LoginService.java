@@ -40,4 +40,20 @@ public class LoginService {
     }
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
+
+  public ResponseEntity<String> changePassword(UserPojo userPojo){
+    Employee user = employeeRepo.findEmployeeByUsername(userPojo.getUser());
+    boolean ok=false;
+    if(user!=null)
+      ok= BCrypt.checkpw(userPojo.getPassword(),user.getPassword());
+    if(ok){
+      String password=userPojo.getNewPassword();
+      String salt = BCrypt.gensalt(12);
+      String hashPass= BCrypt.hashpw(password, salt);
+      user.setPassword(hashPass);
+      employeeRepo.save(user);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  }
 }

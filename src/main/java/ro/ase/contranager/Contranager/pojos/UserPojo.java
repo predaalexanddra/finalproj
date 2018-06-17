@@ -7,5 +7,6 @@ public class UserPojo {
 
   private String user;
   private String password;
+  private String newPassword;
 
 }

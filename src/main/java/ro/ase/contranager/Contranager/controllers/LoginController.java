@@ -23,4 +23,9 @@ public class LoginController {
   public ResponseEntity<String> getLogin(@RequestBody UserPojo userPojo) {
       return loginService.doLogin(userPojo);
   }
+
+  @RequestMapping(value = "/change", method = RequestMethod.POST)
+  public ResponseEntity<String> changePassword(@RequestBody UserPojo userPojo) {
+    return loginService.changePassword(userPojo);
+  }
 }

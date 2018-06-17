@@ -20,7 +20,7 @@ public class MailService {
   @Autowired
   private MailSender mailSender;
 
-  @Scheduled(fixedRate = 120000)
+  @Scheduled(fixedRate = 86400000)
   public void sendEmails(){
     List<Contract> availableContracts= contractRepo.findContractsByIsCompletedIsFalse();
     LocalDate expireDate= LocalDate.now().plusMonths(1);

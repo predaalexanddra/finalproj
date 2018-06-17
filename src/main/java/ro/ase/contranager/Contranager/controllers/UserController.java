@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ro.ase.contranager.Contranager.entities.Employee;
 import ro.ase.contranager.Contranager.pojos.EmployeePojo;
-import ro.ase.contranager.Contranager.pojos.EmployeePojoSimplified;
-import ro.ase.contranager.Contranager.repositories.EmployeeRepo;
 import ro.ase.contranager.Contranager.services.UserService;
 
 @RestController
@@ -33,8 +31,8 @@ public class UserController {
   }
 
   @GetMapping(value="/deleteuser")
-  public ResponseEntity<String> deleteUser(@RequestParam(name = "cnp") Long cnp){
-    Employee result=userService.deleteEmployee(cnp);
+  public ResponseEntity<String> deleteUser(@RequestParam(name = "phone")String phone){
+    Employee result=userService.deleteEmployee(phone);
     if(result!=null)
       return new ResponseEntity<>(HttpStatus.OK);
     else
@@ -42,7 +40,7 @@ public class UserController {
   }
 
   @GetMapping(value="/users")
-  public List<EmployeePojoSimplified> findAll(){
+  public List<EmployeePojo> findAll(){
     return userService.displayAll();
   }
 }

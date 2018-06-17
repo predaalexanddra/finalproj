@@ -64,4 +64,18 @@ public class ContractController {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
+
+  @GetMapping(value = "/chart1")
+  public String findContractsValues() {
+    return contractService.mostValuableContracts();
+  }
+  @GetMapping(value = "/chart2")
+  public String findContractsPerYear() {
+    return contractService.countContracts();
+  }
+  @GetMapping(value = "/chart3")
+  public String findLongTermContracts() {
+    return contractService.longtermContracts();
+  }
+
 }

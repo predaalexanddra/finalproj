@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ro.ase.contranager.Contranager.entities.Employee;
 import ro.ase.contranager.Contranager.entities.Partner;
 import ro.ase.contranager.Contranager.pojos.PartnerPojo;
-import ro.ase.contranager.Contranager.pojos.PartnerPojoSimplified;
 import ro.ase.contranager.Contranager.repositories.PartnerRepo;
 import ro.ase.contranager.Contranager.services.PartnerService;
 
@@ -27,7 +25,7 @@ public class PartnerController {
   PartnerService partnerService;
 
   @GetMapping(value="/partners")
-  public List<PartnerPojoSimplified> findAll(){
+  public List<PartnerPojo> findAll(){
     return partnerService.displayAll();
   }
 

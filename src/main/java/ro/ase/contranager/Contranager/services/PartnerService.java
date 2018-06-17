@@ -8,7 +8,6 @@ import ro.ase.contranager.Contranager.entities.Address;
 import ro.ase.contranager.Contranager.entities.Contact;
 import ro.ase.contranager.Contranager.entities.Partner;
 import ro.ase.contranager.Contranager.pojos.PartnerPojo;
-import ro.ase.contranager.Contranager.pojos.PartnerPojoSimplified;
 import ro.ase.contranager.Contranager.repositories.AddressRepo;
 import ro.ase.contranager.Contranager.repositories.ContactRepo;
 import ro.ase.contranager.Contranager.repositories.PartnerRepo;
@@ -47,15 +46,18 @@ public class PartnerService {
       return null;
   }
 
-  public List<PartnerPojoSimplified> displayAll(){
+  public List<PartnerPojo> displayAll(){
     List<Partner> partners=partnerRepo.findAll();
-    List<PartnerPojoSimplified> pojos=new ArrayList<>();
+    List<PartnerPojo> pojos=new ArrayList<>();
     for (Partner partner:partners
     ) {
-      PartnerPojoSimplified pojo=new PartnerPojoSimplified();
+      PartnerPojo pojo=new PartnerPojo();
       pojo.setCui(partner.getCui());
       pojo.setName(partner.getName());
+      pojo.setPostalCode(partner.getAddress().getPostalCode());
       pojo.setCity(partner.getAddress().getCity());
+      pojo.setCountry(partner.getAddress().getCountry());
+      pojo.setStreet(partner.getAddress().getStreet());
       pojo.setContactName(partner.getContact().getName());
       pojo.setEmail(partner.getContact().getEmail());
       pojo.setPhone(partner.getContact().getPhone());

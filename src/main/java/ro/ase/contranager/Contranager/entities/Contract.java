@@ -29,8 +29,7 @@ public class Contract {
     private Currency currency;
     @NotNull
     private boolean isCompleted;
-    @Lob
-    private Blob document;
+    private String document;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name="contract_type_id")
@@ -47,7 +46,7 @@ public class Contract {
         @NotNull @Size(min = 2, max = 30) String subject,
         @NotNull Timestamp startDate, @NotNull Timestamp endDate,
         @NotNull Double value,
-        @NotNull Currency currency, @NotNull boolean isCompleted, Blob document,
+        @NotNull Currency currency, @NotNull boolean isCompleted, String document,
         ContractType contractType, Partner partner,
         List<Payment> payments) {
         this.noContract = noContract;
