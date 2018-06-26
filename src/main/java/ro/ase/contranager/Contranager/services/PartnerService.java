@@ -10,6 +10,7 @@ import ro.ase.contranager.Contranager.entities.Partner;
 import ro.ase.contranager.Contranager.pojos.PartnerPojo;
 import ro.ase.contranager.Contranager.repositories.AddressRepo;
 import ro.ase.contranager.Contranager.repositories.ContactRepo;
+import ro.ase.contranager.Contranager.repositories.ContractRepo;
 import ro.ase.contranager.Contranager.repositories.PartnerRepo;
 
 @Service
@@ -21,6 +22,8 @@ public class PartnerService {
   private ContactRepo contactRepo;
   @Autowired
   private AddressRepo addressRepo;
+  @Autowired
+  private ContractRepo contractRepo;
 
   public Partner addPartner(PartnerPojo partnerPojo){
     List<Contact> contacts=contactRepo.findAll();
@@ -38,11 +41,11 @@ public class PartnerService {
 
   public Partner deletePartner(Long cui){
     Partner partner= partnerRepo.findByCui(cui);
-    if(partner!=null) {
-      partnerRepo.delete(partner);
-      return partner;
-    }
-    else
+    if(partner!=null)
+      if(contractRepo.findByPartnerOrderByStartDate(partner).isEmpty()) {
+        partnerRepo.delete(partner);
+        return partner;
+      }
       return null;
   }
 

@@ -30,6 +30,7 @@ public class Contract {
     @NotNull
     private boolean isCompleted;
     private String document;
+    private Double RONvalue;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name="contract_type_id")

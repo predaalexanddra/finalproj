@@ -17,5 +17,6 @@ public class ContractPojo {
   private String document;
   private String contractType;
   private String partnerName;
+  private String status;
 
 }

@@ -20,7 +20,6 @@ public class ContranagerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ContranagerApplication.class, args);
-		System.out.println(BCrypt.checkpw("proba12","$2a$12$MSjdWXoftoeqk9CtVuRl0uE2AlsfDA.vcnQChlaAp5xQUn1HOpXlu"));
 
 	}
 }

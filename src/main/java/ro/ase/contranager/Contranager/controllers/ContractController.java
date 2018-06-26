@@ -1,6 +1,7 @@
 package ro.ase.contranager.Contranager.controllers;
 
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,4 +79,30 @@ public class ContractController {
     return contractService.longtermContracts();
   }
 
+  @PostMapping(value = "/getData")
+  public ResponseEntity<String> findContractsByPartner(@RequestBody String partner) {
+    StringBuilder result=contractService.partnerData(partner);
+    System.out.println(result);
+    if (result != null) {
+      return new ResponseEntity<>(result.toString(),HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @PostMapping(value = "/getbyyear")
+  public ResponseEntity<String> findContractsByYear(@RequestBody String year) {
+    String result=contractService.contractsPerYear(Integer.parseInt(year));
+    System.out.println(result);
+    if (result != null) {
+      return new ResponseEntity<>(result,HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @GetMapping(value="/getyears")
+  public Set<Integer> getYears(){
+    return contractService.getContractsYears();
+  }
 }

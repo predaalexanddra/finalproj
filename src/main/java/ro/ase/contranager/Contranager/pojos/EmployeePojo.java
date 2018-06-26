@@ -11,6 +11,6 @@ public class EmployeePojo {
   private String department;
   private String email;
   private String password;
-  private boolean isAdmin;
+  private String isAdmin;
 
 }

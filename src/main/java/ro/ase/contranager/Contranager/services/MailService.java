@@ -27,13 +27,13 @@ public class MailService {
     for (Contract contract:availableContracts) {
       if(contract.getEndDate().toLocalDateTime().toLocalDate().equals(expireDate)){
         String email=contract.getPartner().getContact().getEmail();
-        String body="The contract no. "+contract.getNoContract()+", "+contract.getSubject()+
-            " concluded with our company on "+ contract.getStartDate().toLocalDateTime().toLocalDate()+
-            ", will expire next month.\n" +"Please contact our agents to begin renegotiation.\n "+
+        String body="Contractul cu numarul "+contract.getNoContract()+", "+contract.getSubject()+
+            ", incheiat cu compania noastra la data de "+ contract.getStartDate().toLocalDateTime().toLocalDate()+
+            ", va expira intr-o luna.\n" +"Pentru renegocire, contactati agentii nostri.\n "+
             "\n"
-            + "This is an automatically sent mail, do not respond to it.\n"
+            + "Acesta este un mesaj trimis automat, nu raspundeti la el.\n"
             + "\n"
-            + "With consideration,\n "
+            + "Cu stima,\n "
             + Company.getInstance().getName();
         mailSender.sendMail(Company.getInstance().getEmail(),email,"Contract", body);
       }

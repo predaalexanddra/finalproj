@@ -27,13 +27,13 @@ public class UserService {
     String salt = BCrypt.gensalt(12);
     String hashPass= BCrypt.hashpw(password, salt);
     Employee employee=new Employee(employeePojo.getCnp(),employeePojo.getName(),employeePojo.getPhone(),
-        employeePojo.isAdmin(),employeePojo.getEmail(),hashPass,department);
+        employeePojo.getIsAdmin()=="Yes"?true:false,employeePojo.getEmail(),hashPass,department);
     String email=employee.getUsername();
-    String body="Welcome to CONTRANAGER, "+employee.getName()+"!"+
-        "\n"+"Your account has been created with the password \""+ employeePojo.getPassword()
-        +"\". Please change it when you first log in.\n"+
-        "Thank you for choosing CONTRANAGER!";
-    mailSender.sendMail(Company.getInstance().getEmail(),email,"New account", body);
+    String body="Bine ati venit, "+employee.getName()+"!"+
+        "\n"+"Contul dvs. a fost creat cu parola implicita \""+ employeePojo.getPassword()
+        +"\". Va rugam, modificati-o la prima autentificare.\n"+
+        "Multumim ca ati ales CONTRANAGER!";
+    mailSender.sendMail(Company.getInstance().getEmail(),email,"Cont nou", body);
     return employeeRepo.save(employee);
   }
 
@@ -57,7 +57,7 @@ public class UserService {
       pojo.setEmail(employee.getUsername());
       pojo.setPhone(employee.getPhone());
       pojo.setDepartment(employee.getDepartment().getName());
-      pojo.setAdmin(employee.isAdmin());
+      pojo.setIsAdmin((employee.isAdmin()?"Yes":"No"));
       pojo.setCnp(employee.getCnp());
       pojo.setDepartment(employee.getDepartment().getName());
       pojos.add(pojo);
